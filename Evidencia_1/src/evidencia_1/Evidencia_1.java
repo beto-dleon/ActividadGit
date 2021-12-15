@@ -5,7 +5,7 @@
  */
 package evidencia_1;
 
-import java.util.Scanner;
+import java.util.Scanner; //Import utilizado para la clase Scanner para poder leer variables
 
 /**
  *
@@ -16,17 +16,19 @@ public class Evidencia_1 {
     /**
      * @param args the command line arguments
      */
+    //AQUI EL MÉTODO MAIN
     public static void main(String[] args) {
         
-        String Nombre;
-        int num1;
-        double num2;
-        double suma;
+        String Nombre; //Variable tipo String para guardar el nombre
+        int num1; //Variable tipo entero para guardar un número entero
+        double num2; //Variable tipo double para guardar un número decimal
+        double suma; //Variable tipo double para guardar la suma de los números
         
         
         
         Scanner leer = new Scanner(System.in);
         
+        //Aqui pedimos ingresar un nombre y con "leer" lo guardamos en la variable Nombre
         System.out.println("Ingresa tu nombre:");
         Nombre = leer.nextLine();
         
