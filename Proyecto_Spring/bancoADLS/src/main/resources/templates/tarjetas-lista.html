@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${titulo}"></title>
+</head>
+<body>
+	
+	<h3 th:text="${titulo}"></h3>
+	
+	<br> 
+	
+	<form th:if="${!tarjetas.isEmpty()}" th:action="@{/buscar-tarjeta-numeroId}" th:object="${tarjeta}" method="post">
+	<table>
+		<tr>
+			<td> Introduce número de tarjeta o ID de la cuenta: </td>
+			<td><input type="text" th:field="*{numeroTarjeta}" required /></td>
+		</tr>
+		<tr>
+			<td><input type="submit" value="Buscar" /></td>
+		</tr>
+	</table>
+	</form>
+
+	<br>
+	<br>
+
+	<p th:if="${mensajeError}" th:text="${mensajeError}"></p>
+	<p th:if="${encontrarTarjetas}" th:text="${mensajeSuccess}"></p>
+	<table  th:if="${encontrarTarjetas}">
+	<thead>
+		<tr>
+				<th>ID Tarjeta</th>
+				<th>Numero de tarjeta</th>
+				<th>ICV</th>
+				<th>Tipo de tarjeta</th>
+				<th>ID de la cuenta</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr th:each="tarjetasEn: ${encontrarTarjetas}">
+			<td th:text="${tarjetasEn.getIdTarjeta()}"></td>
+			<td th:text="${tarjetasEn.getNumeroTarjeta()}"></td>
+			<td th:text="${tarjetasEn.getIcv()}"></td>
+			<td th:text="${tarjetasEn.getTipoTarjeta()}"></td>
+			<td th:text="${tarjetasEn.getCuenta().getIdCuenta()}"></td>
+		</tr>
+	</tbody>
+	</table>
+	<br>
+	
+	<p th:if="${tarjetas.isEmpty()}"> La lista de tarjetas esta vacia </p>
+	
+	<table>
+		<thead>
+			<tr>
+				<th>ID Tarjeta</th>
+				<th>Numero de tarjeta</th>
+				<th>ICV</th>
+				<th>Tipo de tarjeta</th>
+				<th>ID de la cuenta</th>
+			</tr>
+		</thead>
+		<tbody>
+		
+			<tr th:each="tarjeta:${tarjetas}"></tr>
+			<tr th:each="tarjeta:${tarjetas}">
+				<td th:text="${tarjeta.getIdTarjeta()}"></td>
+				<td th:text="${tarjeta.getNumeroTarjeta()}"></td>
+				<td th:text="${tarjeta.getIcv()}"></td>
+				<td th:text="${tarjeta.getTipoTarjeta()}"></td>
+				<td th:text="${tarjeta.getCuenta().getIdCuenta()}"></td>
+			</tr>
+		</tbody>
+	</table>
+	
+</body>
+</html>

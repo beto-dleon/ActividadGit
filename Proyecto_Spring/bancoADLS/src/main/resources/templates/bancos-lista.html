@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${titulo}"></title>
+</head>
+<body>
+	<h3 th:text="${titulo}"></h3>
+	
+	<br> 
+	
+	<form th:if="${!bancos.isEmpty()}" th:action="@{/buscar-banco-por-id}" th:object="${banco}" method="post">
+
+	<table>
+	
+	<tr>
+		<td>Introducir ID del banco: </td>
+		<td> <input type="text" th:field="*{idBanco}" required /> </td>
+	</tr>
+	
+	<br>
+	
+	<tr>
+		<td><input type="submit" value="Buscar" /></td>
+	</tr>
+	</table>
+
+	</form>
+	<br>
+	<br>
+
+	<p th:if="${mensajeSuccess}" th:text="${mensajeSuccess}"></p>
+	<p th:if="${mensajeError}" th:text="${mensajeError}"></p>
+	<table th:if="${encontrarBancos}">
+		<thead>
+			<tr>
+				<th>ID del banco</th>
+				<th>Nombre</th>
+				<th>Ubicacion</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="bancosEn: ${encontrarBancos}"></tr>
+			<tr th:each="bancosEn: ${encontrarBancos}">
+				<td th:text="${bancosEn.getIdBanco()}"></td>
+				<td th:text="${bancosEn.getNombre()}"></td>
+				<td th:text="${bancosEn.getUbicacion()}"></td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<br>
+	
+	<p th:if="${bancos.isEmpty()}"> La lista de bancos esta vacia </p>
+	
+	<table>
+		<thead>
+			<tr>
+				
+				<th>ID del banco</th>
+				<th>Nombre</th>
+				<th>Ubicacion</th>
+				
+			</tr>
+		</thead>
+		<tbody>
+		
+			<tr th:each="banco:${bancos}"></tr>
+			<tr th:each="banco:${bancos}">
+				
+				<td th:text="${banco.getIdBanco()}"></td>
+				<td th:text="${banco.getNombre()}"></td>
+				<td th:text="${banco.getUbicacion()}"></td>
+				
+			</tr>
+		</tbody>
+	</table>
+
+</body>
+</html>
