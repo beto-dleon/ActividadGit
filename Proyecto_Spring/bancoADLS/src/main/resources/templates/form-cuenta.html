@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="${titulo}"></title>
+<link href="../static/css/Layout.css" th:href="@{/css/Layout.css}" rel="stylesheet" />
+</head>
+<body>
+	<h2 th:text="${titulo}"></h2>
+	<br>
+	
+	<p th:if="${result}" th:text="${mensaje}"></p>
+	<tbody>
+	<div>
+		<form th:action="@{/form-cuenta}" th:object="${cuenta}" method="post">
+
+				<table>
+
+					<tr>
+						<td>Saldo Actual: </td>
+						<td><input type="text" th:field="*{saldoActual}"></td>
+					</tr>
+					<tr>
+						<td>Fecha de creación (YYYY/MM/DD): </td>
+						<td><input type="text" th:field="*{creacion}"></td>
+					</tr>
+					<tr>
+						<td>ID Cliente:</td>
+						<td><input type="text" th:field="*{idCliente}"></td>			
+					</tr>
+				</table>
+				<br> 
+				<input class="btnAceptar" type="submit" value="Agregar cuenta" />
+				
+		</form>
+	</div>		
+	</tbody>
+	<br>
+	<a th:href="@{/lista}">Volver a la lista</a>
+	<br>
+	<a th:href="@{/}">Regresar al inicio</a>
+</body>
+</html>

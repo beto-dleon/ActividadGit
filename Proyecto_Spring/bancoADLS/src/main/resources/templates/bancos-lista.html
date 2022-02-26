@@ -3,11 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <title th:text="${titulo}"></title>
+<link href="../static/css/Layout.css" th:href="@{/css/Layout.css}" rel="stylesheet" />
 </head>
 <body>
 	<h3 th:text="${titulo}"></h3>
 	
 	<br> 
+	
+	<a class="btnAceptar" th:href="@{/form-banco}">Agregar banco</a>
+	<br>
 	
 	<form th:if="${!bancos.isEmpty()}" th:action="@{/buscar-banco-por-id}" th:object="${banco}" method="post">
 
@@ -21,7 +25,7 @@
 	<br>
 	
 	<tr>
-		<td><input type="submit" value="Buscar" /></td>
+		<td><input class="btnAceptar" type="submit" value="Buscar" /></td>
 	</tr>
 	</table>
 
@@ -29,8 +33,8 @@
 	<br>
 	<br>
 
-	<p th:if="${mensajeSuccess}" th:text="${mensajeSuccess}"></p>
-	<p th:if="${mensajeError}" th:text="${mensajeError}"></p>
+	<p class="msjSuccess" th:if="${mensajeSuccess}" th:text="${mensajeSuccess}"></p>
+	<p class="msjWarning" th:if="${mensajeError}" th:text="${mensajeError}"></p>
 	<table th:if="${encontrarBancos}">
 		<thead>
 			<tr>
@@ -51,7 +55,7 @@
 	
 	<br>
 	
-	<p th:if="${bancos.isEmpty()}"> La lista de bancos esta vacia </p>
+	<p class="msjWarning" th:if="${bancos.isEmpty()}"> La lista de bancos esta vacia </p>
 	
 	<table>
 		<thead>
@@ -71,10 +75,13 @@
 				<td th:text="${banco.getIdBanco()}"></td>
 				<td th:text="${banco.getNombre()}"></td>
 				<td th:text="${banco.getUbicacion()}"></td>
-				
+				<td><a class="btnWarning" th:href="@{/form-banco/} + ${banco.getIdBanco()}" th:text="'Editar'"></a></td>
+				<td><a class="btnDanger" th:href="@{/eliminar-banco/} + ${banco.getIdBanco()}" th:text="'Eliminar'" onclick="return confirm('¿Desea eliminar el banco?');"></a></td>
 			</tr>
 		</tbody>
 	</table>
 
 </body>
+<br>
+<a th:href="@{/}">Regresar al inicio</a>
 </html>

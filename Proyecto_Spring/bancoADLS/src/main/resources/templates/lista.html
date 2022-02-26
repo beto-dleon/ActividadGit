@@ -3,9 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <title th:text="${titulo}"></title>
+<link href="../static/css/Layout.css" th:href="@{/css/Layout.css}" rel="stylesheet" />
 </head>
 <body>
 	<h3 th:text="${titulo}"></h3>
+	
+	<br>
+	<a class="btnAceptar" th:href="@{/form-cuenta}">Agregar nueva cuenta</a>
+	<br>
 	
 	<br> 
 	
@@ -21,7 +26,7 @@
 	<br>
 	
 	<tr>
-		<td><input type="submit" value="Buscar" /></td>
+		<td><input class="btnAceptar" type="submit" value="Buscar" /></td>
 	</tr>
 	</table>
 
@@ -29,8 +34,9 @@
 	<br>
 	<br>
 
-	<p th:if="${mensajeSuccess}" th:text="${mensajeSuccess}"></p>
-	<p th:if="${mensajeError}" th:text="${mensajeError}"></p>
+	<p class="msjSuccess" th:if="${mensajeSuccess}" th:text="${mensajeSuccess}"></p>
+	<p class="msjWarning" th:if="${mensajeError}" th:text="${mensajeError}"></p>
+	
 	<table th:if="${encontrarCuentas}">
 		<thead>
 			<tr>
@@ -53,7 +59,7 @@
 	
 	<br>
 	
-	<p th:if="${cuentas.isEmpty()}"> La lista de cuentas esta vacia </p>
+	<p class="msjWarning" th:if="${cuentas.isEmpty()}"> La lista de cuentas esta vacia </p>
 	
 	<table>
 		<thead>
@@ -72,9 +78,13 @@
 				<td th:text="${cuenta.getIdCliente()}"></td>
 				<td th:text="${cuenta.getSaldoActual()}"></td>
 				<td th:text="${cuenta.getCreacion()}"></td>
+				<td><a class="btnWarning" th:href="@{/form-cuenta/} + ${cuenta.getIdCuenta()}" th:text="'Editar'"></a></td>
+				<td><a class="btnDanger" th:href="@{/eliminar-cuenta/} + ${cuenta.getIdCuenta()}" th:text="'Eliminar'" onclick="return confirm('¿Desea eliminar la cuenta?');"></a></td>
 			</tr>
 		</tbody>
 	</table>
 
 </body>
+<br>
+<a th:href="@{/}">Regresar al inicio</a>
 </html>
